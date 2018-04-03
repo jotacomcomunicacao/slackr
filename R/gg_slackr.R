@@ -51,7 +51,7 @@ ggslackr <- function(plot=last_plot(),
          height=height,
          units=units,
          dpi=dpi,
-         limitsize=limitsize, ...)
+         limitsize=limitsize)
 
   modchan <- slackr_chtrans(channels)
 
@@ -59,7 +59,8 @@ ggslackr <- function(plot=last_plot(),
               add_headers(`Content-Type`="multipart/form-data"),
               body=list(file=upload_file(ftmp),
                         token=api_token,
-                        channels=modchan))
+                        channels=modchan,
+                        ...))
 
   invisible(res)
 

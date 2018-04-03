@@ -38,13 +38,13 @@ dev_slackr <- function(channels=Sys.getenv("SLACK_CHANNEL"), ...,
   on.exit(Sys.setlocale("LC_CTYPE", loc))
 
   ftmp <- tempfile(file, fileext=".png")
-  dev.copy(png, file=ftmp, ...)
+  dev.copy(png, file=ftmp)
   dev.off()
 
   modchan <- slackrChTrans(channels, api_token)
 
   httr::POST(url="https://slack.com/api/files.upload",
              httr::add_headers(`Content-Type`="multipart/form-data"),
-             body=list( file=upload_file(ftmp), token=api_token, channels=modchan))
+             body=list( file=upload_file(ftmp), token=api_token, channels=modchan, ...))
 
 }
